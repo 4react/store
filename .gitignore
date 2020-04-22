@@ -1,0 +1,15 @@
+#ide
+.idea
+.vscode
+
+# dependencies
+node_modules
+
+#build
+lib
+
+# misc
+.DS_Store
+.env.local
+.env.*.local
+*.log*
