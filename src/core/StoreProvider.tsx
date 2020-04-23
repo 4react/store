@@ -1,28 +1,28 @@
 import React, { Context, FC, Reducer, useMemo, useReducer } from 'react'
 import { Action, StoreContext, StoreContextValue } from './StoreContext'
 
-export interface StoreProviderProps<S, A extends Action> {
+export interface StoreProviderProps<S> {
   data?: S,
 }
 
-export type StoreProvider<S, A extends Action> = FC<StoreProviderProps<S, A>> & {
-  context: Context<StoreContextValue<S, A>>
+export type StoreProvider<S> = FC<StoreProviderProps<S>> & {
+  context: Context<StoreContextValue<S>>
 }
 
-const storeProviderFactory = <S, A extends Action>(
-  context: StoreContext<S, A>,
-  reducer: Reducer<S, A>,
+const storeProviderFactory = <S extends any>(
+  context: StoreContext<S>,
+  reducer: Reducer<S, Action>,
   preloadedState?: S
-): StoreProvider<S, A> => {
+): StoreProvider<S> => {
 
   // @ts-ignore
   const initialState: S = preloadedState || reducer(undefined, { type: undefined })
 
-  const storeProvider: StoreProvider<S, A> = (props) => {
+  const storeProvider: StoreProvider<S> = (props) => {
     const { data: customData, children } = props
-    let [data, dispatch] = useReducer<Reducer<S, A>>(reducer, initialState)
+    let [data, dispatch] = useReducer<Reducer<S, Action>>(reducer, initialState)
 
-    const value: StoreContextValue<S, A> = useMemo(() => ({
+    const value: StoreContextValue<S> = useMemo(() => ({
       data: customData !== undefined ? customData : data,
       dispatch
     }), [data, dispatch])

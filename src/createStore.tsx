@@ -3,27 +3,27 @@ import storeProviderFactory, { StoreProvider } from './core/StoreProvider'
 import storeContextFactory, { Action, StoreContext } from './core/StoreContext'
 import useStoryFactory, { StoreHook } from './core/useStore'
 
-export interface StoreCreator<S, A extends Action> {
-  (reducer: Reducer<S, A>, preloadedState?: S): [StoreProvider<S, A>, StoreHook<S, A>]
+export interface StoreCreator<S> {
+  (reducer: Reducer<S, Action>, preloadedState?: S): [StoreProvider<S>, StoreHook<S>]
 }
 
-export interface StoreEnhancer<S, A extends Action> {
-  (storeCreator: StoreCreator<S, A>): StoreCreator<S, A>
+export interface StoreEnhancer<S> {
+  (storeCreator: StoreCreator<S>): StoreCreator<S>
 }
 
 
-export const createStore = <S, A extends Action>(
-  reducer: Reducer<S, A>,
+export const createStore = <S extends any>(
+  reducer: Reducer<S, Action>,
   preloadedState?: S,
-  enhancer?: StoreEnhancer<S, A>
-): [StoreProvider<S, A>, StoreHook<S, A>] => {
+  enhancer?: StoreEnhancer<S>
+): [StoreProvider<S>, StoreHook<S>] => {
 
   if (enhancer) {
     return enhancer(createStore)(reducer, preloadedState)
   }
 
-  const context: StoreContext<S, A> = storeContextFactory()
-  const storeProvider = storeProviderFactory<S, A>(context, reducer, preloadedState)
+  const context: StoreContext<S> = storeContextFactory()
+  const storeProvider = storeProviderFactory<S>(context, reducer, preloadedState)
   const useStore = useStoryFactory(context)
 
   return [storeProvider, useStore]

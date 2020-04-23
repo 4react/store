@@ -1,10 +1,10 @@
 import { Reducer } from 'react'
 import { Action } from './core/StoreContext'
 
-const combineReducers = <S, A extends Action>(
-  reducers: { [key: string]: Reducer<S, A> },
+const combineReducers = <S>(
+  reducers: { [key: string]: Reducer<any, Action> },
   initialValue?: S
-): Reducer<S, A> => {
+): Reducer<S, Action> => {
   const defaultValue = initialValue || {}
   Object
     .keys(reducers)

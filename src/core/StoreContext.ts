@@ -5,16 +5,16 @@ export interface Action {
   [key: string]: any
 }
 
-export interface StoreContextValue<S, A extends Action> {
+export interface StoreContextValue<S> {
   data: S,
-  dispatch: Dispatch<ReducerAction<Reducer<S, A>>>
+  dispatch: Dispatch<ReducerAction<Reducer<S, Action>>>
 }
 
-export type StoreContext<S, A extends Action> = Context<StoreContextValue<S, A>>
+export type StoreContext<S> = Context<StoreContextValue<S>>
 
-const storeContextFactory = <S, A extends Action>(): StoreContext<S, A> => (
+const storeContextFactory = <S>(): StoreContext<S> => (
   // @ts-ignore
-  createContext<StoreContextValue<S, A>>(undefined)
+  createContext<StoreContextValue<S>>(undefined)
 )
 
 export default storeContextFactory
