@@ -1,6 +1,6 @@
 {
   "name": "@4react/store",
-  "version": "2020.1.1",
+  "version": "2020.1.2",
   "author": "Matteo Zanoncello",
   "license": "ISC",
   "main": "lib/store.js",
