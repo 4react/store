@@ -1,4 +1,4 @@
-# @4react / state
+# @4react / store
 
 A Redux-like state container for React Applications.
 
@@ -10,7 +10,7 @@ This package is largely inspired by [Redux](https://github.com/reduxjs/redux). P
 ### Import dependency
 
 ```
-npm i @4react/state
+npm i @4react/store
 ```
 
 ### Create Store
@@ -18,7 +18,7 @@ Use the ***createStore*** utility to create both the store provider and its corr
 passing the main reducer of the store to it.
 
 ```jsx
-import { createStore } from '@4react/state'
+import { createStore } from '@4react/store'
 
 export const [ MyStore, useMyStore ] = createStore(myStoreReducer)
 ```

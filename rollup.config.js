@@ -5,7 +5,7 @@ import typescript from 'rollup-plugin-typescript2'
 
 import pkg from './package.json'
 
-const libraryName = 'state'
+const libraryName = 'store'
 const globalLibs = Object.keys(pkg.dependencies)
 const externalLibs = Object.keys(pkg.peerDependencies)
 

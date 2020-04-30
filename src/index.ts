@@ -1,7 +1,7 @@
 import { createStore } from './createStore'
 import combineReducers from './combineReducers'
 
-export default {
+export {
   createStore,
   combineReducers
 }

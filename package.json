@@ -1,10 +1,10 @@
 {
-  "name": "@4react/state",
+  "name": "@4react/store",
   "version": "2020.1.1",
   "author": "Matteo Zanoncello",
   "license": "ISC",
-  "main": "lib/state.js",
-  "module": "lib/state.module.js",
+  "main": "lib/store.js",
+  "module": "lib/store.module.js",
   "types": "lib/types",
   "files": [
     "lib",
