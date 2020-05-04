@@ -18,9 +18,9 @@ const AddTodo = () => {
   const input = createRef()
   const { dispatch } = useStore()
 
-  const addTodo = (evt) => {
-    dispatch({ type: 'ADD_TODO', payload: input?.current?.value })
-    if (input?.current?.value) {
+  const addTodo = () => {
+    if (input && input.current && input.current.value) {
+      dispatch({ type: 'ADD_TODO', payload: input.current.value })
       input.current.value = ""
     }
   }

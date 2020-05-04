@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { Context, FC, Reducer, useMemo, useReducer } from 'react'
 import { Action, StoreContext, StoreContextValue } from './StoreContext'
 
 export interface StoreProviderProps<S> {
-  data?: S,
+  data?: S
 }
 
 export type StoreProvider<S> = FC<StoreProviderProps<S>> & {
@@ -14,18 +15,17 @@ const storeProviderFactory = <S extends any>(
   reducer: Reducer<S, Action>,
   preloadedState?: S
 ): StoreProvider<S> => {
-
   // @ts-ignore
   const initialState: S = preloadedState || reducer(undefined, { type: undefined })
 
-  const storeProvider: StoreProvider<S> = (props) => {
+  const storeProvider: StoreProvider<S> = props => {
     const { data: customData, children } = props
-    let [data, dispatch] = useReducer<Reducer<S, Action>>(reducer, initialState)
+    const [data, dispatch] = useReducer<Reducer<S, Action>>(reducer, customData || initialState)
 
-    const value: StoreContextValue<S> = useMemo(() => ({
-      data: customData !== undefined ? customData : data,
-      dispatch
-    }), [data, dispatch])
+    const value: StoreContextValue<S> = useMemo(
+      () => ({ data, dispatch }),
+      [data, dispatch]
+    )
 
     return (
       <context.Provider value={value}>
